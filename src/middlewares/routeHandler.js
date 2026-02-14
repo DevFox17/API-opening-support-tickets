@@ -7,7 +7,7 @@ export function routeHandler(request, response) {
   })
   // se sim, faz isso:
   if (route) {
-    return route.controller(request, response)
+    return route.controller({request, response})
   }
 
     // se não, faz isso:
