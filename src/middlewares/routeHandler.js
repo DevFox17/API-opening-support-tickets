@@ -1,4 +1,8 @@
 import { routes } from "../routes/index.js";
+import { Database } from "../database/database.js";
+
+// instancia o Database
+const database = new Database()
 
 export function routeHandler(request, response) {
   const route = routes.find((route) => {
@@ -7,10 +11,10 @@ export function routeHandler(request, response) {
   })
   // se sim, faz isso:
   if (route) {
-    return route.controller({request, response})
+    return route.controller({request, response, database})
   }
 
     // se não, faz isso:
-   return response.wiriteHead(404).end()
+  return response.wiriteHead(404).end()
 
 }
