@@ -1,7 +1,7 @@
  import { randomUUID } from "node:crypto"
  
  // Funçao que executa algo quando a nossa rota for chamada
-export function create( {request, response} ) {
+export function create( {request, response, database} ) {
   const { equipment, description, user_name } = request.body
 
   // isso aqui o usuário que vai colocar ( equipment, description, etc. Menos o id:, created_at etc )
@@ -13,8 +13,10 @@ export function create( {request, response} ) {
     user_name,
     status: "open",
     created_at: new Date(),
-    updated_at: new Date()
+    updated_at: new Date(),
   }
 
-  return response.end(JSON.stringify(ticket))
+  database.insert("tickets", ticket)
+
+  return response.writeHead(201).end(JSON.stringify(ticket))
 }
