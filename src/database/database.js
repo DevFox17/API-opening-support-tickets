@@ -31,8 +31,20 @@ export class Database {
     this.#persist()
   }
 
-  select(table) {
+  select(table, filters) {
     let data = this.#database[table] ?? []
+
+    if (filters) {
+      data = data.filter(( row ) => {
+        // entries separa a chave e o valor
+        // some() testa se ao menos um dos elementos no array passa no teste implementado pela função atribuída e retorna um valor true ou false.
+        return Object.entries(filters).some(([key, value]) => {
+          // Retorna um valor verdadediro ou falso se ( includes ), incluido na chave
+          return row[key].toLowerCase().includes(value.toLowerCase())
+        })
+      })
+    }
+
     return data
   }
  }
