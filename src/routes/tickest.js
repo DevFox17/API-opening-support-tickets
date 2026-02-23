@@ -14,13 +14,14 @@ export const tickets = [
     path: "/tickets",
     controller: index,
   },
-  { method: "PUT",
+  { 
+    method: "PUT",
     path: "/tickets/:id",
     controller: update,
   },
   {
-     method: "PATCH",
+    method: "PATCH",
     path: "/tickets/:id/close",
     controller: updateStatus,
-  }
+  },
 ]
